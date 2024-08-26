@@ -46,7 +46,7 @@ import org.json.JSONObject;
 
 /**
  * @author Narayanan
- * @version 11.72
+ * @version 11.73
  * {@code Author: Narayanan, Revision: 1, Created: 16th Aug 2024, Modified: 16th Aug 2024}
  */
 public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment implements View.OnClickListener {

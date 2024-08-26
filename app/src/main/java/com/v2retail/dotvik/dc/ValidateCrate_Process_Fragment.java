@@ -80,6 +80,13 @@ import java.util.Locale;
  * Use the {@link ValidateCrate_Process_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+/**
+ * @author Narayanan
+ * @version 11.73
+ * {@code Author: Narayanan, Revision: 2, Modified: 24th Aug 2024}
+ * Changes: Added logic to check and allow Mix article scan if EtPoDataModel.MXALOW is X
+ */
 public class ValidateCrate_Process_Fragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -602,7 +609,7 @@ public class ValidateCrate_Process_Fragment extends Fragment implements View.OnC
                                     String m = jsonObject1.getString("MATERIAL");
                                     String c = jsonObject1.getString("CRATE");
                                     if(c.equals(crate)) {
-                                        if (m.equals(etPoDataModels.get(i).getMATERIAL())){
+                                        if (m.equals(etPoDataModels.get(i).getMATERIAL()) || etPoDataModels.get(i).getMXALOW().equalsIgnoreCase("X")){
                                             String sq = jsonObject1.getString("SCAN_QTY");
                                             sum = Integer.valueOf(sq);
                                             sum =  sum + Integer.valueOf(UMREZ);
@@ -678,6 +685,7 @@ public class ValidateCrate_Process_Fragment extends Fragment implements View.OnC
         } else {
             box.getBox("Alert", "Fill Crate Number");
             crate_et.requestFocus();
+            return;
         }
         article_no_et.setText("");
         article_no_et.requestFocus();
@@ -1180,7 +1188,7 @@ public class ValidateCrate_Process_Fragment extends Fragment implements View.OnC
 //                                        gr.requestFocus();
                                         return;
                                     } else {
-                                        JSONArray jsonArray = responsebody.getJSONArray("ET_PO_DATA");
+                                        jsonArray = responsebody.getJSONArray("ET_PO_DATA");
                                         Log.v(TAG,"ET_PO_DATA--->"+jsonArray.toString());
                                         if (jsonArray.length()>1) {
                                             for (int i = 1; i < jsonArray.length(); i++) {
@@ -1193,7 +1201,8 @@ public class ValidateCrate_Process_Fragment extends Fragment implements View.OnC
                                                 String MATERIAL = jsonObject.getString("MATERIAL");
                                                 String PO_QTY = jsonObject.getString("PO_QTY");
                                                 String CRATE = jsonObject.getString("CRATE");
-                                                etPoDataModels.add(new EtPoDataModel(MAT_DESC, SCAN_QTY, UNIT, OPEN_QTY, GR_QTY, MATERIAL, PO_QTY, CRATE));
+                                                String MIX_ALLOW = jsonObject.getString("MIX_ALLOWED");
+                                                etPoDataModels.add(new EtPoDataModel(MAT_DESC, SCAN_QTY, UNIT, OPEN_QTY, GR_QTY, MATERIAL, PO_QTY, CRATE, MIX_ALLOW));
                                                 poQty = poQty + Double.valueOf(PO_QTY).intValue();
 
                                             }

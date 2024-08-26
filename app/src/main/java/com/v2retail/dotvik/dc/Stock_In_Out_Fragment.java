@@ -74,6 +74,12 @@ import java.util.List;
  * Use the {@link Stock_In_Out_Fragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+/**
+ * @author Narayanan
+ * @version 11.73
+ * {@code Author: Narayanan, Revision: 2, Modified: 24th Aug 2024}
+ * Changes: Capturing MIX_ALLOWED and storing the value into EtPoDataModel.MXALOW before passing it to Validate Crate Process
+ */
 public class Stock_In_Out_Fragment extends Fragment implements View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -736,7 +742,8 @@ public class Stock_In_Out_Fragment extends Fragment implements View.OnClickListe
                                                 String MATERIAL = jsonObject.getString("MATERIAL");
                                                 String PO_QTY = jsonObject.getString("PO_QTY");
                                                 String CRATE = jsonObject.getString("CRATE");
-                                                etPoDataModels.add(new EtPoDataModel(MAT_DESC, SCAN_QTY, UNIT, OPEN_QTY, GR_QTY, MATERIAL, PO_QTY, CRATE));
+                                                String MIX_ALLOW = jsonObject.getString("MIX_ALLOWED");
+                                                etPoDataModels.add(new EtPoDataModel(MAT_DESC, SCAN_QTY, UNIT, OPEN_QTY, GR_QTY, MATERIAL, PO_QTY, CRATE, MIX_ALLOW));
 
                                             }
                                         }

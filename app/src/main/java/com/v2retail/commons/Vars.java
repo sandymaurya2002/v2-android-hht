@@ -123,4 +123,7 @@ public class Vars {
     public static String ZWM_STORE_IROD_NATURE = "ZWM_STORE_IROD_NATURE";
     public static String ZWM_STORE_IROD_NATURE_MAPPING = "ZWM_STORE_IROD_NATURE_MAPPING";
 
+    public static String ZWM_STORE_IROD_PICK_VALIDATE = "ZWM_STORE_IROD_PICK_VALIDATE";
+
+
 }

@@ -48,7 +48,7 @@ import java.util.HashMap;
 
 /**
  * @author Narayanan
- * @version 11.72
+ * @version 11.73
  * {@code Author: Narayanan, Revision: 1, Created: 16th Aug 2024, Modified: 16th Aug 2024}
  */
 public class FragmentStoreDisplayInternalIRODToIRODPicking extends Fragment implements View.OnClickListener {
@@ -277,15 +277,11 @@ public class FragmentStoreDisplayInternalIRODToIRODPicking extends Fragment impl
         String irod = UIFuncs.toUpperTrim(txt_irod);
         JSONObject args = new JSONObject();
         try {
-            args.put("bapiname", Vars.ZWM_STORE_IROD_VALIDATE);
+            args.put("bapiname", Vars.ZWM_STORE_IROD_PICK_VALIDATE);
             args.put("IM_WERKS", WERKS);
             args.put("IM_USER", USER);
-            args.put("IM_LGNUM", "SDC");
-            args.put("IM_LGPLA", "");
             args.put("IM_IROD", irod);
-            args.put("IM_ERROR_IF_TAGGED", "");
-            args.put("IM_ERROR_IF_NOT_TAGGED", "X");
-            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_VALIDATE, REQUEST_VALIDATE_IROD, args);
+            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_PICK_VALIDATE, REQUEST_VALIDATE_IROD, args);
         } catch (JSONException e) {
             e.printStackTrace();
             UIFuncs.errorSound(con);
@@ -410,7 +406,9 @@ public class FragmentStoreDisplayInternalIRODToIRODPicking extends Fragment impl
                                         }
                                     } else {
                                         if (request == REQUEST_VALIDATE_IROD) {
-                                            step2();
+                                            txt_scanned_irod.setText(UIFuncs.toUpperTrim(txt_irod));
+                                            txt_irod.setText("");
+                                            UIFuncs.enableInput(con, txt_ean);
                                         }
                                         if (request == REQUEST_VALIDATE_EAN) {
                                             setData(responsebody);

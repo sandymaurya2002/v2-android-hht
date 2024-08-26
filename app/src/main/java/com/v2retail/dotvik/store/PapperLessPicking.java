@@ -25,6 +25,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -99,22 +100,21 @@ public class PapperLessPicking extends Fragment implements IBarcodeResult, Obser
     JSONArray m_ean_array = null;
     JSONArray m_lips_array= null;
 
+    LinearLayout ll_external_hu;
+
     private List<ETPACKMAT> mETPACKMAT=new ArrayList<>();
 
 
     ProgressDialog dialog = null;
+    String mode = null;
 
 
     // ChainwayBarCode
     private Barcode2D barcode2D;
 
 
-    public static PapperLessPicking newInstance(String ARG_PARAM1, String ARG_PARAM2) {
+    public static PapperLessPicking newInstance(String mode) {
         PapperLessPicking fragment = new PapperLessPicking();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, ARG_PARAM1);
-        args.putString(ARG_PARAM2, ARG_PARAM2);
-        fragment.setArguments(args);
         return fragment;
     }
 
@@ -125,28 +125,7 @@ public class PapperLessPicking extends Fragment implements IBarcodeResult, Obser
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
         }
-
         fm = getFragmentManager();
-
-        /*
-        fm.addOnBackStackChangedListener(new FragmentManager.OnBackStackChangedListener() {
-            @Override
-            public void onBackStackChanged() {
-                int n = fm.getBackStackEntryCount();
-                if(n>0) {
-                    FragmentManager.BackStackEntry entry = fm.getBackStackEntryAt(n - 1);
-                    Log.d("BACKSTACK", entry.getName());
-                    if(entry.getName().equals("PapperLessPicking")) {
-                    } else if(entry.getName().equals("PapperLessScan")) {
-
-                    }
-                }
-            }
-        });
-         */
-
-        // initializeChainway();
-       //  ApplicationController.getInstance().refreshObservable().addObserver(PapperLessPicking.this);
     }
 
     @Override
@@ -159,6 +138,7 @@ public class PapperLessPicking extends Fragment implements IBarcodeResult, Obser
         selectPac=view.findViewById(R.id.select_pac);
         optionDeliverySelection=view.findViewById(R.id.option_delivery_selection);
         inputExternalHu=view.findViewById(R.id.input_external_hu);
+        ll_external_hu = view.findViewById(R.id.ll_paperless_picking_external_hu);
 
         backV2=view.findViewById(R.id.back_v2);
         nextV2=view.findViewById(R.id.next_v2);

@@ -17,8 +17,9 @@ public class EtPoDataModel implements Serializable {
     String MATNR;
     String VEMNG;
     String BDMNG;
+    String MXALOW;
 
-    public EtPoDataModel(String MAT_DESC, String SCAN_QTY, String UNIT, String OPEN_QTY, String GR_QTY, String MATERIAL, String PO_QTY, String CRATE) {
+    public EtPoDataModel(String MAT_DESC, String SCAN_QTY, String UNIT, String OPEN_QTY, String GR_QTY, String MATERIAL, String PO_QTY, String CRATE, String MIX_ALLOW) {
         this.MAT_DESC = MAT_DESC;
         this.SCAN_QTY = SCAN_QTY;
         this.UNIT = UNIT;
@@ -27,6 +28,7 @@ public class EtPoDataModel implements Serializable {
         this.MATERIAL = MATERIAL;
         this.PO_QTY = PO_QTY;
         this.CRATE = CRATE;
+        this.MXALOW = MIX_ALLOW;
     }
 
     public EtPoDataModel(String MATNR,String VEMNG,String BDMNG){
@@ -129,6 +131,14 @@ public class EtPoDataModel implements Serializable {
         this.PO_QTY = PO_QTY;
     }
 
+    public String getMXALOW() {
+        return MXALOW;
+    }
+
+    public void setMXALOW(String MXALOW) {
+        this.MXALOW = MXALOW;
+    }
+
     @Override
     public String toString() {
         return "{" +
@@ -142,6 +152,7 @@ public class EtPoDataModel implements Serializable {
                 ", LGPLA:" + LGPLA + '\'' +
                 ", MATERIAL:" + MATERIAL + '\'' +
                 ", PO_QTY:" + PO_QTY + '\'' +
+                ", MIX_ALLOWED:" + MXALOW + '\'' +
                 '}';
     }
 }
