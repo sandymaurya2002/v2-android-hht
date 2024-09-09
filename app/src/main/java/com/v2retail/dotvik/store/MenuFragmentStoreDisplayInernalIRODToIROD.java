@@ -28,7 +28,7 @@ public class MenuFragmentStoreDisplayInernalIRODToIROD extends Fragment implemen
     FragmentManager fm;
     AlertBox box;
     private OnFragmentInteractionListener mListener;
-    Button picking, putway, empty;
+    Button picking, putway, empty, transfer;
 
     public MenuFragmentStoreDisplayInernalIRODToIROD() {
         // Required empty public constructor
@@ -56,10 +56,12 @@ public class MenuFragmentStoreDisplayInernalIRODToIROD extends Fragment implemen
         picking = view.findViewById(R.id.store_display_internal_irod_to_irod_picking);
         putway = view.findViewById(R.id.store_display_internal_irod_to_irod_putway);
         empty = view.findViewById(R.id.store_display_internal_irod_to_irod_empty);
+        transfer = view.findViewById(R.id.store_display_internal_irod_to_irod_transfer);
 
         picking.setOnClickListener(this);
         putway.setOnClickListener(this);
         empty.setOnClickListener(this);
+        transfer.setOnClickListener(this);
 
         return view;
     }
@@ -80,6 +82,9 @@ public class MenuFragmentStoreDisplayInernalIRODToIROD extends Fragment implemen
                 break;
             case R.id.store_display_internal_irod_to_irod_empty:
                 fragment = FragmentStoreDisplayInternalDeTagIROD.newInstance(Vars.BREADCRUMB_IROD_TO_IROD);
+                break;
+            case R.id.store_display_internal_irod_to_irod_transfer:
+                fragment = FragmentStoreDisplayInternalIRODToIRODTransfer.newInstance(Vars.BREADCRUMB_IROD_TO_IROD);
                 break;
         }
 

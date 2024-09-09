@@ -43,6 +43,7 @@ import com.v2retail.dotvik.modal.putaway.ETDataStorePutway;
 import com.v2retail.dotvik.modal.putaway.ETEanDataStorePutway;
 import com.v2retail.util.AlertBox;
 import com.v2retail.util.SharedPreferencesData;
+import com.v2retail.util.Util;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,38 +54,33 @@ import java.util.Map;
 
 /**
  * @author Narayanan
- * @version 11.73
- * {@code Author: Narayanan, Revision: 1, Created: 16th Aug 2024, Modified: 16th Aug 2024}
+ * @version 11.76
+ * {@code Author: Narayanan, Revision: 1, Created: 07th Sep 2024, Modified: 07th Sep 2024}
  */
-public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment implements View.OnClickListener {
+public class FragmentStoreDisplayInternalIRODToIRODTransfer extends Fragment implements View.OnClickListener {
 
     View view;
     Context con;
     FragmentManager fm;
     AlertBox box;
     ProgressDialog dialog;
-    String TAG = FragmentStoreDisplayInternalIRODToIRODPicking.class.getName();
+    String TAG = FragmentStoreDisplayInternalIRODToIRODTransfer.class.getName();
     private static final int REQUEST_VALIDATE_IROD = 5401;
-    private static final int REQUEST_VALIDATE_EAN = 5402;
     private static final int REQUEST_SAVE = 5403;
     String URL;
     String WERKS;
     String USER;
     private static String parent;
     Button btn_back, btn_reset, btn_next, btn_save;
-    EditText txt_store, txt_sloc, txt_irod, txt_ean, txt_article, txt_description, txt_sqty, txt_tqty;
+    EditText txt_store, txt_sloc, txt_irod, txt_scanned_irod, txt_bin, txt_scanned_bin, txt_tqty;
     LinearLayout ll_screen2;
     String title;
-    Map<String,ETDataStorePutway> etData = new HashMap<>();
-    Map<String, ETEanDataStorePutway> etEanData = new HashMap<>();
-    int totalScannedQty;
-
-    public FragmentStoreDisplayInternalIRODToIRODPutway() {
+    public FragmentStoreDisplayInternalIRODToIRODTransfer() {
         // Required empty public constructor
     }
 
-    public static FragmentStoreDisplayInternalIRODToIRODPutway newInstance(String breadcrumb) {
-        FragmentStoreDisplayInternalIRODToIRODPutway fragment = new FragmentStoreDisplayInternalIRODToIRODPutway();
+    public static FragmentStoreDisplayInternalIRODToIRODTransfer newInstance(String breadcrumb) {
+        FragmentStoreDisplayInternalIRODToIRODTransfer fragment = new FragmentStoreDisplayInternalIRODToIRODTransfer();
         fragment.title  = breadcrumb;
         return fragment;
     }
@@ -93,7 +89,7 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
     public void onResume() {
         super.onResume();
         ((Home_Activity) getActivity())
-                .getSupportActionBar().setTitle(UIFuncs.getSmallTitle(title + " > PUTWAY"));
+                .getSupportActionBar().setTitle(UIFuncs.getSmallTitle(title + " > TRANSFER"));
     }
 
     @Override
@@ -105,8 +101,7 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_store_display_internal_irod_to_irod_putway, container, false);
+        view = inflater.inflate(R.layout.fragment_store_display_internal_irod_to_irod_transfer, container, false);
 
         con = getContext();
         box = new AlertBox(con);
@@ -116,21 +111,20 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
         WERKS = data.read("WERKS");
         USER = data.read("USER");
 
-        txt_store = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_store);
-        txt_sloc = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_sloc);
-        txt_irod = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_irod);
-        txt_ean = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_ean);
-        txt_article = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_articleno);
-        txt_description = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_description);
-        txt_sqty = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_sqty);
-        txt_tqty = view.findViewById(R.id.txt_disp_internal_irod_to_irod_putway_tqty);
+        txt_store = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_store);
+        txt_sloc = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_sloc);
+        txt_irod = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_irod);
+        txt_scanned_irod = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_scanned_irod);
+        txt_bin = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_bin);
+        txt_scanned_bin = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_scanned_bin);
+        txt_tqty = view.findViewById(R.id.txt_disp_internal_irod_to_irod_transfer_tqty);
 
-        btn_back = view.findViewById(R.id.btn_disp_internal_irod_to_irod_putway_back);
-        btn_reset = view.findViewById(R.id.btn_disp_internal_irod_to_irod_putway_reset);
-        btn_next = view.findViewById(R.id.btn_disp_internal_irod_to_irod_putway_next);
-        btn_save = view.findViewById(R.id.btn_disp_internal_irod_to_irod_putway_save);
+        btn_back = view.findViewById(R.id.btn_disp_internal_irod_to_irod_transfer_back);
+        btn_reset = view.findViewById(R.id.btn_disp_internal_irod_to_irod_transfer_reset);
+        btn_next = view.findViewById(R.id.btn_disp_internal_irod_to_irod_transfer_next);
+        btn_save = view.findViewById(R.id.btn_disp_internal_irod_to_irod_transfer_save);
 
-        ll_screen2 = view.findViewById(R.id.ll_disp_internal_irod_to_irod_putway_screen2);
+        ll_screen2 = view.findViewById(R.id.ll_disp_internal_irod_to_irod_transfer_screen2);
 
         btn_back.setOnClickListener(this);
         btn_reset.setOnClickListener(this);
@@ -146,23 +140,24 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
 
         return view;
     }
+
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btn_disp_internal_irod_to_irod_putway_back:
+            case R.id.btn_disp_internal_irod_to_irod_transfer_back:
                 box.confirmBack(fm, con);
                 break;
-            case R.id.btn_disp_internal_irod_to_irod_putway_reset:
+            case R.id.btn_disp_internal_irod_to_irod_transfer_reset:
                 box.getBox("Confirm", "Reset! Are you sure?", (dialogInterface, i) -> {
                     step2();
                 }, (dialogInterface, i) -> {
                     return;
                 });
                 break;
-            case R.id.btn_disp_internal_irod_to_irod_putway_next:
+            case R.id.btn_disp_internal_irod_to_irod_transfer_next:
                 step2();
                 break;
-            case R.id.btn_disp_internal_irod_to_irod_putway_save:
+            case R.id.btn_disp_internal_irod_to_irod_transfer_save:
                 saveData();
                 break;
         }
@@ -208,21 +203,21 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
                 }
             }
         });
-        txt_ean.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        txt_bin.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
                     UIFuncs.hideKeyboard(getActivity());
-                    String value = UIFuncs.toUpperTrim(txt_ean);
+                    String value = UIFuncs.toUpperTrim(txt_bin);
                     if (value.length() > 0) {
-                        validateEan();
+                        saveData();
                         return true;
                     }
                 }
                 return false;
             }
         });
-        txt_ean.addTextChangedListener(new TextWatcher() {
+        txt_bin.addTextChangedListener(new TextWatcher() {
             boolean scannerReading = false;
 
             @Override
@@ -243,7 +238,7 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
             public void afterTextChanged(Editable s) {
                 String value = s.toString().toUpperCase().trim();
                 if (value.length() > 0 && scannerReading) {
-                    validateEan();
+                    saveData();
                 }
             }
         });
@@ -258,39 +253,27 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
     }
 
     private void step2() {
-        etData = new HashMap<>();
-        etEanData = new HashMap<>();
-        totalScannedQty=0;
         ll_screen2.setVisibility(View.VISIBLE);
         btn_reset.setVisibility(View.VISIBLE);
         btn_next.setVisibility(View.GONE);
-        btn_save.setVisibility(View.VISIBLE);
+        btn_save.setVisibility(View.GONE);
         txt_irod.setText("");
-        txt_ean.setText("");
-        txt_article.setText("");
-        txt_description.setText("");
-        txt_sqty.setText("");
+        txt_scanned_irod.setText("");
+        txt_bin.setText("");
+        txt_scanned_bin.setText("");
         txt_tqty.setText("");
-        UIFuncs.disableInput(con, txt_ean);
+        UIFuncs.disableInput(con, txt_bin);
         UIFuncs.enableInput(con, txt_irod);
     }
 
-    private void showError(String title, String message) {
-        UIFuncs.errorSound(con);
-        AlertBox box = new AlertBox(getContext());
-        box.getBox(title, message);
-    }
-
     private void validateIrod() {
-        String irod = UIFuncs.toUpperTrim(txt_irod);
         JSONObject args = new JSONObject();
         try {
-            args.put("bapiname", Vars.ZWM_STORE_IROD_PUTWAY_VALIDATE);
+            args.put("bapiname", Vars.ZWM_STORE_IROD_TRAN_VALIDATE);
             args.put("IM_WERKS", WERKS);
             args.put("IM_USER", USER);
-            args.put("IM_LGNUM", "SDC");
-            args.put("IM_IROD", irod);
-            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_PUTWAY_VALIDATE, REQUEST_VALIDATE_IROD, args);
+            args.put("IM_IROD", UIFuncs.toUpperTrim(txt_irod));
+            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_TRAN_VALIDATE, REQUEST_VALIDATE_IROD, args);
         } catch (JSONException e) {
             e.printStackTrace();
             UIFuncs.errorSound(con);
@@ -303,88 +286,31 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
         }
     }
 
-    private void validateEan(){
-        String eanno = UIFuncs.toUpperTrim(txt_ean);
-        ETEanDataStorePutway eanRecord = searchEan(eanno);
-        if(eanRecord != null){
-            String matnr = eanRecord.getMatnr();
-            if(etData.containsKey(matnr)){
-                ETDataStorePutway etRecord = etData.get(matnr);
-                int allowedQty = (int) Double.parseDouble(etRecord.getVerme1());
-                int matnrSqty = (int) Double.parseDouble(etRecord.getVerme());
-                int lotQty = (int) Double.parseDouble(eanRecord.getUmrez());
-
-                if(matnrSqty + lotQty > allowedQty){
-                    showError("Not Allowed","Already scanned maximum allowed Qty");
-                }else{
-                    totalScannedQty = totalScannedQty + lotQty;
-                    etRecord.setVerme((matnrSqty + lotQty)+"");
-                    txt_sqty.setText(totalScannedQty+"");
-                    txt_article.setText(UIFuncs.removeLeadingZeros(etRecord.getMatnr()));
-                    txt_description.setText(etRecord.getMaktx());
-                }
-            }else{
-                showError("Invalid Article","Article not found in ET Records");
-            }
-        }
-        txt_ean.setText("");
-        txt_ean.requestFocus();
-    }
-    private ETEanDataStorePutway searchEan(String eanno){
-        if(etEanData.containsKey(eanno)){
-            return etEanData.get(eanno);
-        }else{
-            showError("Invalid EAN","Scanned Article is not valid");
-        }
-        return null;
-    }
-
-    private void setData(JSONObject rsponse) {
+    private void setData(JSONObject response) {
         try {
-            JSONArray arrEtData = rsponse.getJSONArray("ET_DATA");
-            JSONArray arrEtEanData = rsponse.getJSONArray("ET_EAN_DATA");
-
-            int arrlength = arrEtData.length();
-            if(arrlength > 0){
-                for(int recordIndex = 1; recordIndex < arrlength; recordIndex++){
-                    JSONObject ET_RECORD  = arrEtData.getJSONObject(recordIndex);
-                    ETDataStorePutway putwayData = ETDataStorePutway.newInstance(ET_RECORD,UIFuncs.toUpperTrim(txt_sloc),WERKS,"");
-                    putwayData.setIrod(UIFuncs.toUpperTrim(txt_irod));
-                    etData.put(ET_RECORD.getString("MATNR"), putwayData);
-                }
-            }
-            arrlength = arrEtEanData.length();
-            if(arrlength > 0){
-                HashMap<String, ETEanDataStorePutway> mapEtEanData = new HashMap<>();
-                for(int recordIndex = 1; recordIndex < arrlength; recordIndex++){
-                    JSONObject ET_EAN_RECORD  = arrEtEanData.getJSONObject(recordIndex);
-                    etEanData.put(ET_EAN_RECORD.getString("EAN11"),ETEanDataStorePutway.newInstance(ET_EAN_RECORD));
-                }
-            }
-            UIFuncs.disableInput(con, txt_irod);
-            txt_ean.setText("");
-            UIFuncs.enableInput(con, txt_ean);
+            String exQty = response.getString("EX_QTY");
+            txt_tqty.setText(Util.convertToDoubleString(exQty));
+            txt_scanned_irod.setText(UIFuncs.toUpperTrim(txt_irod));
+            txt_irod.setText("");
+            txt_bin.setText("");
+            UIFuncs.enableInput(con, txt_bin);
             return;
         } catch (Exception exce) {
             box.getErrBox(exce);
         }
         txt_irod.setText("");
-        UIFuncs.enableInput(con, txt_irod);
+        txt_irod.requestFocus();
     }
 
     private void saveData() {
         JSONObject args = new JSONObject();
         try {
-            args.put("bapiname", Vars.ZWM_STORE_IROD_PUT);
-            args.put("IM_WERKS", WERKS);
-            args.put("IM_LGNUM", "SDC");
+            args.put("bapiname", Vars.ZWM_STORE_IROD_GANDOLA_TAG);
             args.put("IM_USER", USER);
-            JSONArray etScanData = getScanDataToSubmit();
-            if(etScanData == null){
-                return;
-            }
-            args.put("IT_DATA", etScanData);
-            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_PUT, REQUEST_SAVE, args);
+            args.put("IM_WERKS", WERKS);
+            args.put("IM_GANDOLA", UIFuncs.toUpperTrim(txt_bin));
+            args.put("IM_USER", UIFuncs.toUpperTrim(txt_scanned_irod));
+            showProcessingAndSubmit(Vars.ZWM_STORE_IROD_GANDOLA_TAG, REQUEST_SAVE, args);
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -396,30 +322,6 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
             AlertBox box = new AlertBox(getContext());
             box.getErrBox(e);
         }
-    }
-
-    private JSONArray getScanDataToSubmit(){
-        try {
-            JSONArray arrScanData = new JSONArray();
-            for (Map.Entry<String, ETDataStorePutway> etRecords : etData.entrySet()) {
-                ETDataStorePutway etRecord = etRecords.getValue();
-                int matnrScannedQty = (int) Double.parseDouble(etRecord.getVerme());
-                if(matnrScannedQty > 0){
-                    String scanDataJsonString = new Gson().toJson(etRecord);
-                    JSONObject itDataJson = new JSONObject(scanDataJsonString);
-                    arrScanData.put(itDataJson);
-                }
-            }
-            if (arrScanData.length() == 0) {
-                showError("Empty Request", "Noting to submit, please scan some articles");
-            }else{
-                return arrScanData;
-            }
-        }catch (Exception exce){
-            box.getErrBox(exce);
-        }
-        txt_ean.requestFocus();
-        return null;
     }
 
     public void showProcessingAndSubmit(String rfc, int request, JSONObject args) {
@@ -490,19 +392,23 @@ public class FragmentStoreDisplayInternalIRODToIRODPutway extends Fragment imple
                                         if (request == REQUEST_VALIDATE_IROD) {
                                             step2();
                                         }
+                                        if (request == REQUEST_SAVE) {
+                                            txt_bin.setText("");
+                                            txt_bin.requestFocus();
+                                        }
                                     } else {
                                         if (request == REQUEST_VALIDATE_IROD) {
                                             setData(responsebody);
                                         }
                                         if (request == REQUEST_SAVE) {
+                                            txt_scanned_bin.setText(UIFuncs.toUpperTrim(txt_bin));
+                                            txt_bin.setText("");
+                                            txt_irod.requestFocus();
                                             AlertBox box = new AlertBox(getContext());
                                             box.getBox("Success", returnobj.getString("MESSAGE"));
-                                            step2();
-                                            return;
                                         }
                                     }
                                 }
-                                return;
                             }
                         }
                     } catch (JSONException e) {

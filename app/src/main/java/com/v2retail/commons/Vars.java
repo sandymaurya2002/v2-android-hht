@@ -138,4 +138,7 @@ public class Vars {
     public static String ZWM_STORE_IROD_EMPTY = "ZWM_STORE_IROD_EMPTY";
     public static String ZWM_STORE_IROD_EAN_STOCK_V01 = "ZWM_STORE_IROD_EAN_STOCK_V01";
     public static String ZWM_STORE_IROD_PUTWAY_VALID1 = "ZWM_STORE_IROD_PUTWAY_VALID1";
+
+    public static String ZWM_STORE_IROD_TRAN_VALIDATE = "ZWM_STORE_IROD_TRAN_VALIDATE";
+    public static String ZWM_STORE_IROD_GANDOLA_TAG = "ZWM_STORE_IROD_GANDOLA_TAG";
 }

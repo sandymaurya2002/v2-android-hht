@@ -1491,7 +1491,8 @@ public class PapperLessScan extends Fragment implements IBarcodeResult  {
 
     private void printHu(JSONObject huObj) {
         TSPLPrinter printer = new TSPLPrinter(getContext());
-        printer.sendPrintCommandToBluetoothPrinter("4B-2033PA-BFA4", huObj);
+        //4B-2033PA-BFA4
+        printer.sendPrintCommandToBluetoothPrinter("4B-2033PA-9B5A", huObj);
     }
 
     @Override

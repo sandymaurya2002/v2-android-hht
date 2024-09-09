@@ -37,6 +37,7 @@ import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.v2retail.ApplicationController;
+import com.v2retail.commons.UIFuncs;
 import com.v2retail.dotvik.R;
 import com.v2retail.util.AlertBox;
 import com.v2retail.util.SharedPreferencesData;
@@ -52,7 +53,7 @@ import org.json.JSONObject;
  */
 public class ScanHuInPalleteFragment extends Fragment implements View.OnClickListener {
 
-    private EditText pallete,scan_hu,scan_hu_to,destination_stored,scanned_hu_count;
+    private EditText pallete,scan_hu,scan_hu_to,destination_stored,scanned_hu_count, batch_no;
     private Activity activity;
     private String URL ="";
     private String TAG ="ScanHuInPalleteFragment";
@@ -115,6 +116,7 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
         pallete = view.findViewById(R.id.pallete);
         scan_hu = view.findViewById(R.id.scan_hu);
         scan_hu_to = view.findViewById(R.id.scan_hu_to);
+        batch_no = view.findViewById(R.id.batch_no);
         destination_stored = view.findViewById(R.id.destination_stored);
         scanned_hu_count = view.findViewById(R.id.scanned_hu_count);
         back = view.findViewById(R.id.back);
@@ -147,7 +149,6 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
     }
 
     private void onEditListener() {
-
         pallete.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
@@ -192,12 +193,8 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
                 return false;
             }
         });
-
-
-
-
-
     }
+
     void addTextChangeListeners() {
 
         pallete.addTextChangedListener(new TextWatcher() {
@@ -266,12 +263,6 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
                 }
             }
         });
-
-
-
-
-
-
     }
 
     void loadPalleteData(){
@@ -337,9 +328,6 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
             Log.v(TAG,jsonObject.toString());
             params.put("bapiname", rfc);
             params.put("IM_PARMS", jsonObject);
-
-
-
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -463,9 +451,7 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
             jsonObject.put("INDICATOR",1);
             params.put("bapiname", rfc);
             params.put("IM_PARMS", jsonObject);
-
-
-
+            params.put("IM_ABATCH", UIFuncs.toUpperTrim(batch_no));
 
         } catch (JSONException e) {
             e.printStackTrace();
@@ -528,12 +514,13 @@ public class ScanHuInPalleteFragment extends Fragment implements View.OnClickLis
                                             data.put("EXIDV",huNumber);
                                             data.put("WERKS",EX_DATA.getString("WERKS"));
                                             data.put("PALETTE",pNo);
+
                                             jsonArray.put(data);
                                             huCount = huCount + 1;
                                             destination_stored.setText(EX_DATA.getString("WERKS"));
                                             scanned_hu_count.setText(String.valueOf(huCount));
                                             scan_hu_to.setText(huNumber);
-
+                                            batch_no.setText(EX_DATA.getString("ABATCH"));
 
                                         }else {
                                             AlertBox box = new AlertBox(getContext());

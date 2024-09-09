@@ -129,7 +129,7 @@ public class TSPLPrinter {
                 qty = String.format("Qty %s", Util.convertToDoubleString(huObj.getString("VEMNG")));
                 hhtid = String.format("HHT ID %s", huObj.getString("HHT_ID"));
                 date = String.format("Date:- %s", huObj.getString("DATUM"));
-                weight = "HU Weight:- XXKg";
+                weight = String.format("HU Weight:- %s", huObj.getString("WEIGHT")+huObj.getString("GEWEI"));
                 tvstext = huObj.getString("TVS_TEXT");
                 huno = huObj.getString("SAP_HU");
             }catch (Exception exce){
@@ -178,5 +178,15 @@ public class TSPLPrinter {
         String command = "TEXT " + startX + ", " + y + ",\"3\",0, " + fontsize + ", " + fontsize + ",\"" + text + "\"\n";
 
         return command;
+    }
+
+    public static String extractDate(String sapDate) {
+        String[] parts = sapDate.split(" ");
+        if (parts.length >= 3) {
+            // Combine the first three parts to form the date
+            return parts[0] + " " + parts[1] + " " + parts[2];
+        } else {
+            return "Invalid date format";
+        }
     }
 }

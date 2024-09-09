@@ -136,7 +136,8 @@ public class MenuFragmentInwardTVSPaperLess extends Fragment implements View.OnC
             case R.id.btn_tvs_paperless_test_print:
                 //discover();
                 TSPLPrinter printer = new TSPLPrinter(getContext());
-                printer.sendPrintCommandToBluetoothPrinter("4B-2033PA-BFA4", null);
+                //4B-2033PA-BFA4
+                printer.sendPrintCommandToBluetoothPrinter("4B-2033PA-9B5A", null);
                 break;
         }
 

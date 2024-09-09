@@ -101,7 +101,29 @@
                     android:layout_height="wrap_content"
                     android:hint=" " />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:padding="5dp">
 
+                <TextView
+                    android:layout_weight=".9"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Batch No"
+                    android:textSize="15sp" />
+
+                <EditText
+                    android:layout_weight="1.5"
+                    android:textSize="15sp"
+                    android:id="@+id/batch_no"
+                    android:layout_width="0dp"
+                    android:inputType="text"
+                    android:enabled="false"
+                    android:layout_height="wrap_content"
+                    android:hint="Batch No" />
+            </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
