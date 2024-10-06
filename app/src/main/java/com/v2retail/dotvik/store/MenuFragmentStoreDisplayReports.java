@@ -14,31 +14,27 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.v2retail.dotvik.R;
-import com.v2retail.dotvik.dc.HU_RFID_Scan_Fragment;
 import com.v2retail.util.AlertBox;
 
 /**
  * @author Narayanan
- * @version 11.71
- * {@code Author: Narayanan, Revision: 2, Created: 30th Jul 2024, Modified: 19th Sep 2024}
+ * @version 11.82
+ * {@code Author: Narayanan, Revision: 1, Created: 19th Sep 2024, Modified: 19th Sep 2024}
  */
-public class MenuFragmentStoreDisplay extends Fragment implements View.OnClickListener,
-    MenuFragmentStoreDisplayInbound.OnFragmentInteractionListener,
-    MenuFragmentStoreDisplayOutbound.OnFragmentInteractionListener,
-    MenuFragmentStoreDisplayInernal.OnFragmentInteractionListener,
-    MenuFragmentStoreDisplayInernalIRODToIROD.OnFragmentInteractionListener,
-    MenuFragmentStoreDisplayReports.OnFragmentInteractionListener{
+public class MenuFragmentStoreDisplayReports extends Fragment implements View.OnClickListener {
+
     Context con;
     FragmentManager fm;
     AlertBox box;
     private OnFragmentInteractionListener mListener;
-    Button inbound,outbound,internal,reports;
-    public MenuFragmentStoreDisplay() {
+    Button stock_0001;
+
+    public MenuFragmentStoreDisplayReports() {
         // Required empty public constructor
     }
 
-    public static MenuFragmentStoreDisplay newInstance(String param1, String param2) {
-        MenuFragmentStoreDisplay fragment = new MenuFragmentStoreDisplay();
+    public static MenuFragmentStoreDisplayReports newInstance() {
+        MenuFragmentStoreDisplayReports fragment = new MenuFragmentStoreDisplayReports();
         return fragment;
     }
 
@@ -50,24 +46,18 @@ public class MenuFragmentStoreDisplay extends Fragment implements View.OnClickLi
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.menu_fragment_store_display, container, false);
+
+        View view = inflater.inflate(R.layout.menu_fragment_store_display_reports, container, false);
         con=getContext();
         box=new AlertBox(con);
         fm=getActivity().getSupportFragmentManager();
 
-        inbound = view.findViewById(R.id.store_display_inbound);
-        outbound = view.findViewById(R.id.store_display_outbound);
-        internal = view.findViewById(R.id.store_display_internal);
-        reports = view.findViewById(R.id.store_display_reports);
+        stock_0001 = view.findViewById(R.id.store_display_reprots_stock_for_0001);
 
-        inbound.setOnClickListener(this);
-        outbound.setOnClickListener(this);
-        internal.setOnClickListener(this);
-        reports.setOnClickListener(this);
+        stock_0001.setOnClickListener(this);
 
         return view;
     }
-
     @Override
     public void onClick(View view) {
         setFragment(view.getId());
@@ -77,24 +67,15 @@ public class MenuFragmentStoreDisplay extends Fragment implements View.OnClickLi
         Fragment fragment = null;
         switch (fragmentID) {
 
-            case R.id.store_display_inbound:
-                fragment = new MenuFragmentStoreDisplayInbound();
-                break;
-            case R.id.store_display_outbound:
-                fragment = new MenuFragmentStoreDisplayOutbound();
-                break;
-            case R.id.store_display_internal:
-                fragment = new MenuFragmentStoreDisplayInernal();
-                break;
-            case R.id.store_display_reports:
-                fragment = new MenuFragmentStoreDisplayReports();
+            case R.id.store_display_reprots_stock_for_0001:
+                fragment = FragmentDisplayReportStock0001.newInstance("Display > Reports");
                 break;
         }
 
         if (fragment != null) {
             FragmentTransaction ft =fm.beginTransaction();
-            ft.replace(R.id.home, fragment, "StoreDisplay");
-            ft.addToBackStack("StoreDisplay");
+            ft.replace(R.id.home, fragment, "StoreDisplayReports");
+            ft.addToBackStack("StoreDisplayReports");
             ft.commit();
         }
     }
@@ -135,15 +116,11 @@ public class MenuFragmentStoreDisplay extends Fragment implements View.OnClickLi
     public void onResume() {
         super.onResume();
         ((Home_Activity) getActivity())
-                .setActionBarTitle("Display 0001");
-    }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
+                .setActionBarTitle("Display > Reports");
     }
 
     public interface OnFragmentInteractionListener {
         void onFragmentInteraction(Uri uri);
     }
+
 }

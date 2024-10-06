@@ -69,7 +69,8 @@ public class Home_Activity extends AppCompatActivity
         Scan_Stock_take_V2Fragment.OnFragmentInteractionListener,
         DisplayAreaProcessFragment.OnFragmentInteractionListener,
         EcommFragmentProcess.OnFragmentInteractionListener,
-        MenuFragmentStoreDisplayInernalIRODToIROD.OnFragmentInteractionListener {
+        MenuFragmentStoreDisplayInernalIRODToIROD.OnFragmentInteractionListener,
+        MenuFragmentStoreDisplayReports.OnFragmentInteractionListener {
 
     String werks;
     String user;

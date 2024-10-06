@@ -143,4 +143,6 @@ public class Vars {
     public static String ZWM_STORE_IROD_TRAN_VALIDATE = "ZWM_STORE_IROD_TRAN_VALIDATE";
     public static String ZWM_STORE_IROD_GANDOLA_TAG = "ZWM_STORE_IROD_GANDOLA_TAG";
     public static String ZWM_PRINT_HU_TVS = "ZWM_PRINT_HU_TVS";
+
+    public static String ZWM_STK_IROD_GANDOLA_0001="ZWM_STK_IROD_GANDOLA_0001";
 }

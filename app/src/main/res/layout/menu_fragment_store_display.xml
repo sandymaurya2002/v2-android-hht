@@ -41,6 +41,14 @@
                 android:id="@+id/store_display_internal"
                 android:background="@color/buttonColor"
                 android:text="Internal" />
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:textColor="@color/white"
+                android:id="@+id/store_display_reports"
+                android:background="@color/buttonColor"
+                android:text="Reports" />
         </LinearLayout>
     </ScrollView>
 </FrameLayout>
