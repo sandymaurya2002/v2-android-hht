@@ -1,11 +1,11 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 31
+    compileSdkVersion 34
     defaultConfig {
         applicationId "com.v2retail.dotvik"
         minSdkVersion 25
-        targetSdkVersion 31
+        targetSdkVersion 34
         versionCode 1170
         versionName "11.83"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
@@ -43,7 +43,8 @@ android {
         debug {
             // storeFile file('H:\\keystore\\V2Retail_at_456_keystore')
 
-            storeFile file('D:/Projects/V2Retail_at_456_keystore')
+            // Set V2_KEYSTORE env var or place keystore in project root
+            storeFile rootProject.file(System.getenv('V2_KEYSTORE') ?: 'V2Retail_at_456_keystore')
             storePassword 'V2Retail@456'
             keyAlias 'v2retail'
             keyPassword 'V2Retail@456'

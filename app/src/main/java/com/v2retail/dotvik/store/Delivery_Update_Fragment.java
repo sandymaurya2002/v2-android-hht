@@ -360,7 +360,11 @@ public class Delivery_Update_Fragment  extends Fragment  {
         // String url = this.requestUrl.substring(0, this.requestUrl.lastIndexOf("/"));
 
         // Use below for testing
-        String url = "http://192.168.151.40:6080/xmwgw";
+        SharedPreferencesData prefs = new SharedPreferencesData(getContext());
+        String savedUrl = prefs.read("URL");
+        String url = (savedUrl != null && !savedUrl.isEmpty())
+                ? savedUrl.substring(0, savedUrl.lastIndexOf("/"))
+                : "https://v2-hht-api.azurewebsites.net/api/hht";
 
         url += "/noacljsonrfcadaptor?bapiname=" + rfc + "&aclclientid=android";
         Log.d(TAG, "URL_>" + url);

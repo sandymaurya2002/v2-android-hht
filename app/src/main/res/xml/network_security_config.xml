@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <network-security-config>
+    <!-- Azure Prod — HTTPS only, no cleartext needed -->
+    <domain-config cleartextTrafficPermitted="false">
+        <domain includeSubdomains="true">v2-hht-api.azurewebsites.net</domain>
+        <domain includeSubdomains="true">v2hhtrelay.servicebus.windows.net</domain>
+    </domain-config>
+    <!-- Legacy on-prem servers — HTTP allowed -->
     <domain-config cleartextTrafficPermitted="true">
         <domain includeSubdomains="true">192.168.151.40</domain>
         <domain includeSubdomains="true">192.168.144.200</domain>

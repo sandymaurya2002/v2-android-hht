@@ -195,7 +195,9 @@ public class IPActivity extends AppCompatActivity implements View.OnClickListene
 
                             }else {
                                 try{
-                                    checkIP(iparr[0].trim() + "/index.jsp");
+                                    // Use /health for Azure, /index.jsp for old servers
+                                    String healthPath = iparr[0].trim().contains("azurewebsites.net") ? "/health" : "/index.jsp";
+                                    checkIP(iparr[0].trim() + healthPath);
                                 }catch (Exception e)
                                 {
                                     box.getErrBox(e);
@@ -210,6 +212,13 @@ public class IPActivity extends AppCompatActivity implements View.OnClickListene
             @Override
             public void onErrorResponse(VolleyError e) {
                 e.printStackTrace();
+                // appversion endpoint not available (Azure) — proceed to login directly
+                try {
+                    String healthPath = iparr[0].trim().contains("azurewebsites.net") ? "/health" : "/index.jsp";
+                    checkIP(iparr[0].trim() + healthPath);
+                } catch (Exception ex) {
+                    box.getErrBox(ex);
+                }
             }
         });
         Volley.newRequestQueue(this).add(strreq);

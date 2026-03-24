@@ -35,23 +35,12 @@
     <string name="date">Date.</string>
 
     <array name="ipAddress">
-
-        <item>https://app.v2axasync-prd.v2rtl.com:8443/xmwgw (Prod)</item>
-        <!--
-        <item>http://192.168.144.200:8080/xmwgw (Prod)</item>
-        <item>http://192.168.151.40:7080/xmwgw (QA)</item>
-        <item>http://192.168.151.40:6080/xmwgw (Dev)</item>
-        -->
+        <!-- Azure (PRIMARY — use this) -->
+        <item>https://v2-hht-api.azurewebsites.net/api/hht (Azure Prod)</item>
+        <!-- Legacy servers (fallback only) -->
+        <item>https://app.v2axasync-prd.v2rtl.com:8443/xmwgw (Old Prod)</item>
         <item>http://192.168.144.200:9080/xmwgw (HanaProd)</item>
-        <item>http://192.168.144.200:18080/xmwgw (HanaPP)</item>
         <item>http://192.168.151.40:17080/xmwgw (HanaQA)</item>
-        <item>http://192.168.151.40:16080/xmwgw (HanaDev)</item>
-
-        <!--<item>http://223.30.160.101:1080/xmwgwqa (QA)</item>
-        <item>http://223.30.160.101:1080/xmwgwdev (Dev)</item>-->
-
-        <item>http://103.55.63.14:1080/hanaqa (hanaQA)</item>
-        <item>http://103.55.63.14:1080/hanadev (hanaDev)</item>
     </array>
     <array name="choose_store">
         <item>DC</item>

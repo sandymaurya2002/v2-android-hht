@@ -18,7 +18,7 @@ public class SharedPreferencesData {
     public String read(String key) {
 
         String data = null;
-        if (key != null || key.length() > 0 || !key.equals("")) {
+        if (key != null && !key.isEmpty()) {
 
             data = preferences.getString(key, null);
         } else {
@@ -28,8 +28,8 @@ public class SharedPreferencesData {
     }
 
     public void write(String key, String value) {
-        if (key != null || key.length() > 0 || !key.equals("")) {
-            if (value != null || value.length() > 0 || !value.equals("")) {
+        if (key != null && !key.isEmpty()) {
+            if (value != null && !value.isEmpty()) {
                 editor = preferences.edit();
                 editor.putString(key, value);
                 editor.commit();
@@ -40,7 +40,7 @@ public class SharedPreferencesData {
     }
 
     public void delete(String key) {
-        if (key != null || key.length() > 0 || !key.equals("")) {
+        if (key != null && !key.isEmpty()) {
             editor = preferences.edit();
 
             editor.remove(key);
