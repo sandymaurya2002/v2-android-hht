@@ -45,20 +45,12 @@ jobs:
         env:
           ANDROID_HOME: ${{ env.ANDROID_SDK_ROOT }}
 
-      - name: Sign APK
+      - name: Rename and verify APK
         run: |
-          $ANDROID_SDK_ROOT/build-tools/$(ls $ANDROID_SDK_ROOT/build-tools | sort -V | tail -1)/apksigner sign \
-            --ks V2Retail_at_456_keystore \
-            --ks-key-alias v2retail \
-            --ks-pass pass:V2Retail@456 \
-            --key-pass pass:V2Retail@456 \
-            --out app/release/V2_HHT_Azure_Release.apk \
-            app/release/app-release-unsigned.apk
-          echo "APK signed"
-
-      - name: Verify APK
-        run: |
-          ls -lh app/release/*.apk
+          ls -lh app/release/
+          # AGP signing config in build.gradle already produces a signed APK
+          cp app/release/app-release.apk app/release/V2_HHT_Azure_Release.apk
+          echo "✅ APK ready: $(du -sh app/release/V2_HHT_Azure_Release.apk)"
           $ANDROID_SDK_ROOT/build-tools/$(ls $ANDROID_SDK_ROOT/build-tools | sort -V | tail -1)/apksigner verify \
             app/release/V2_HHT_Azure_Release.apk && echo "✅ APK signature verified"
 
