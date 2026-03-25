@@ -20,7 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:background="@color/white"
+            android:background="@color/bgCard"
             android:orientation="horizontal">
 
             <RadioButton
@@ -29,7 +29,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:textSize="18sp"
                 android:text="QC Fail" />
 
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:textSize="18sp"
                 android:text="Cancel" />
         </RadioGroup>
@@ -72,7 +72,7 @@
                 android:id="@+id/text_destination_crate_qcputaway"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:enabled="false"
                 android:hint=""
                 android:imeOptions="actionDone"
@@ -112,7 +112,7 @@
                 android:id="@+id/text_article_no_qcputaway"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:hint="Scan Article"
                 android:imeOptions="actionDone"
                 android:maxLines="1"
@@ -154,7 +154,7 @@
                 android:layout_height="wrap_content"
                 android:padding="7dp"
                 android:textColor="@color/black"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:textSize="18sp"
                 android:hint=""
                 android:maxLines="1"
