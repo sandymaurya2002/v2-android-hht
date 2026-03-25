@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- V2 WMS Spacing System -->
+    <!-- V2 WMS Spacing System v3.0 -->
 
     <!-- Page -->
     <dimen name="pagePadding">16dp</dimen>
@@ -51,8 +51,21 @@
     <!-- Header -->
     <dimen name="headerPadding">16dp</dimen>
 
-    <!-- Stat card icon -->
+    <!-- Stat card -->
     <dimen name="statIconSize">32dp</dimen>
     <dimen name="statIconRadius">10dp</dimen>
     <dimen name="statNumberSize">22sp</dimen>
+
+    <!-- ═══════════════════════════════════ -->
+    <!-- LEGACY — required by existing layouts -->
+    <!-- ═══════════════════════════════════ -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="header_text_size">16sp</dimen>
+    <dimen name="label_text_size">12sp</dimen>
+    <dimen name="text_size">13sp</dimen>
+    <dimen name="right_mar">8dp</dimen>
+    <dimen name="right_mar_but">4dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
 </resources>
