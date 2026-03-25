@@ -52,7 +52,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
-            android:background="@color/white"
+            android:background="@color/bgCard"
             android:orientation="horizontal">
 
             <RadioButton
@@ -61,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:textSize="18sp"
                 android:text="Full Crate" />
 
@@ -71,7 +71,7 @@
                 android:layout_height="wrap_content"
                 android:padding="10dp"
                 android:textColor="@color/black"
-                android:background="@color/white"
+                android:background="@color/bgCard"
                 android:textSize="18sp"
                 android:text="Partial Picking" />
         </RadioGroup>
