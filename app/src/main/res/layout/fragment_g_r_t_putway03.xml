@@ -1,180 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/bgPage">
-
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:gravity="center_vertical"
-        android:paddingStart="16dp" android:paddingEnd="16dp"
-        android:paddingTop="12dp" android:paddingBottom="12dp"
-        android:background="@color/bgCard">
-        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-            android:layout_weight="1" android:orientation="vertical">
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Article putway" android:textSize="16sp" android:textStyle="bold"
-                android:textColor="@color/textPrimary" />
-            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content"
-                android:text="Store-wise in HU" android:textSize="11sp" android:textColor="@color/textLabel" />
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent" android:layout_height="match_parent" android:orientation="vertical" android:background="@color/bgPage">
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical" android:paddingStart="16dp" android:paddingEnd="16dp" android:paddingTop="12dp" android:paddingBottom="12dp" android:background="@color/bgCard">
+        <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Article putway" android:textSize="16sp" android:textStyle="bold" android:textColor="@color/textPrimary" />
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Store-wise in HU" android:textSize="11sp" android:textColor="@color/textLabel" />
         </LinearLayout>
-        <TextView android:id="@+id/tv_error_badge" android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:visibility="gone"
-            android:textSize="10sp" android:textStyle="bold" android:text="Error"
-            android:textColor="@color/colorError" android:background="@color/colorErrorBg"
-            android:paddingStart="10dp" android:paddingEnd="10dp"
-            android:paddingTop="4dp" android:paddingBottom="4dp" />
+        <TextView android:id="@+id/tv_error_badge" android:layout_width="wrap_content" android:layout_height="wrap_content" android:visibility="gone" android:textSize="10sp" android:textStyle="bold" android:text="Error" android:textColor="@color/colorError" android:background="@color/colorErrorBg" android:paddingStart="10dp" android:paddingEnd="10dp" android:paddingTop="4dp" android:paddingBottom="4dp" />
     </LinearLayout>
-
     <ScrollView android:layout_width="match_parent" android:layout_height="0dp" android:layout_weight="1">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-            android:orientation="vertical" android:padding="16dp">
-
-            <LinearLayout android:id="@+id/layout_error_banner"
-                android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:background="@color/colorErrorBg" android:padding="12dp"
-                android:layout_marginBottom="12dp" android:gravity="center_vertical"
-                android:visibility="gone">
-                <TextView android:id="@+id/tv_error_message" android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:textSize="11sp"
-                    android:textStyle="bold" android:textColor="@color/colorError" />
+        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:padding="16dp">
+            <LinearLayout android:id="@+id/layout_error_banner" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/colorErrorBg" android:padding="12dp" android:layout_marginBottom="12dp" android:gravity="center_vertical" android:visibility="gone">
+                <TextView android:id="@+id/tv_error_message" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/colorError" />
             </LinearLayout>
-
-            <!-- Zone selection (tap grid) -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:background="@color/bgCard"
-                android:padding="14dp" android:layout_marginBottom="10dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="ZONE STATION" android:textSize="10sp" android:textStyle="bold"
-                    android:textColor="@color/textLabel" android:letterSpacing="0.08"
-                    android:layout_marginBottom="10dp" />
-                <android.widget.Spinner android:id="@+id/spinner_zone"
-                    android:layout_width="match_parent" android:layout_height="52dp"
-                    android:background="@color/bgInput"
-                    android:paddingStart="14dp" android:paddingEnd="14dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/bgCard" android:padding="14dp" android:layout_marginBottom="10dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="ZONE STATION" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:letterSpacing="0.08" android:layout_marginBottom="10dp" />
+                <android.widget.Spinner android:id="@+id/spinner_zone" android:layout_width="match_parent" android:layout_height="52dp" android:background="@color/bgInput" android:paddingStart="14dp" android:paddingEnd="14dp" />
             </LinearLayout>
-
-            <!-- Scan Crate -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:background="@color/bgCard"
-                android:padding="14dp" android:layout_marginBottom="10dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="SCAN CRATE" android:textSize="10sp" android:textStyle="bold"
-                    android:textColor="@color/textLabel" android:letterSpacing="0.08"
-                    android:layout_marginBottom="10dp" />
-                <EditText android:id="@+id/et_scan_crate"
-                    android:layout_width="match_parent" android:layout_height="52dp"
-                    android:background="@color/bgInput" android:textColor="@color/textPrimary"
-                    android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold"
-                    android:paddingStart="14dp" android:paddingEnd="14dp"
-                    android:hint="Scan crate barcode..." android:imeOptions="actionDone"
-                    android:maxLines="1" android:singleLine="true" android:inputType="text" />
-                <LinearLayout android:id="@+id/layout_crate_ok"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:background="@color/colorSuccessBg" android:padding="10dp"
-                    android:layout_marginTop="8dp" android:visibility="gone">
-                    <TextView android:id="@+id/tv_crate_ok" android:layout_width="match_parent"
-                        android:layout_height="wrap_content" android:textSize="11sp"
-                        android:textStyle="bold" android:textColor="@color/colorSuccess"
-                        android:text="Crate validated" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/bgCard" android:padding="14dp" android:layout_marginBottom="10dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="SCAN CRATE" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:letterSpacing="0.08" android:layout_marginBottom="10dp" />
+                <EditText android:id="@+id/et_scan_crate" android:layout_width="match_parent" android:layout_height="52dp" android:background="@color/bgInput" android:textColor="@color/textPrimary" android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold" android:paddingStart="14dp" android:paddingEnd="14dp" android:hint="Scan crate barcode..." android:imeOptions="actionDone" android:maxLines="1" android:singleLine="true" android:inputType="text" />
+                <LinearLayout android:id="@+id/layout_crate_ok" android:layout_width="match_parent" android:layout_height="wrap_content" android:background="@color/colorSuccessBg" android:padding="10dp" android:layout_marginTop="8dp" android:visibility="gone">
+                    <TextView android:id="@+id/tv_crate_ok" android:layout_width="match_parent" android:layout_height="wrap_content" android:textSize="11sp" android:textStyle="bold" android:textColor="@color/colorSuccess" android:text="Crate validated" />
                 </LinearLayout>
             </LinearLayout>
-
-            <!-- Article + Proposed Store info -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:background="@color/bgCard"
-                android:padding="14dp" android:layout_marginBottom="10dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="ARTICLE" android:textSize="10sp" android:textStyle="bold"
-                    android:textColor="@color/textLabel" android:letterSpacing="0.08"
-                    android:layout_marginBottom="10dp" />
-                <EditText android:id="@+id/et_scan_article"
-                    android:layout_width="match_parent" android:layout_height="52dp"
-                    android:background="@color/bgInput" android:textColor="@color/textPrimary"
-                    android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold"
-                    android:paddingStart="14dp" android:paddingEnd="14dp"
-                    android:hint="Scan article barcode..." android:imeOptions="actionDone"
-                    android:maxLines="1" android:singleLine="true" android:inputType="text" />
-
-                <!-- Proposed store + qty display -->
-                <LinearLayout android:id="@+id/layout_article_info"
-                    android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:orientation="horizontal" android:layout_marginTop="10dp"
-                    android:visibility="gone">
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:orientation="vertical"
-                        android:background="@color/statGreenBg" android:padding="12dp"
-                        android:layout_marginEnd="4dp">
-                        <TextView android:id="@+id/tv_proposed_store"
-                            android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:text="—" android:textSize="20sp" android:textStyle="bold"
-                            android:textColor="@color/colorSuccess" />
-                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:text="STORE" android:textSize="8sp" android:textStyle="bold"
-                            android:textColor="@color/textLabel" android:layout_marginTop="3dp" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/bgCard" android:padding="14dp" android:layout_marginBottom="10dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="ARTICLE" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:letterSpacing="0.08" android:layout_marginBottom="10dp" />
+                <EditText android:id="@+id/et_scan_article" android:layout_width="match_parent" android:layout_height="52dp" android:background="@color/bgInput" android:textColor="@color/textPrimary" android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold" android:paddingStart="14dp" android:paddingEnd="14dp" android:hint="Scan article barcode..." android:imeOptions="actionDone" android:maxLines="1" android:singleLine="true" android:inputType="text" />
+                <LinearLayout android:id="@+id/layout_article_info" android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:layout_marginTop="10dp" android:visibility="gone">
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@color/statGreenBg" android:padding="12dp" android:layout_marginEnd="4dp">
+                        <TextView android:id="@+id/tv_proposed_store" android:layout_width="match_parent" android:layout_height="wrap_content" android:text="—" android:textSize="20sp" android:textStyle="bold" android:textColor="@color/colorSuccess" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="STORE" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:layout_marginTop="3dp" />
                     </LinearLayout>
-                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content"
-                        android:layout_weight="1" android:orientation="vertical"
-                        android:background="@color/statBlueBg" android:padding="12dp"
-                        android:layout_marginStart="4dp">
-                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:orientation="horizontal" android:gravity="center_vertical">
-                            <Button android:id="@+id/btn_qty_minus"
-                                android:layout_width="32dp" android:layout_height="32dp"
-                                android:text="-" android:textSize="18sp" android:textStyle="bold"
-                                android:textColor="@color/textPrimary" android:background="@color/bgCard"
-                                android:padding="0dp" />
-                            <TextView android:id="@+id/tv_scan_qty"
-                                android:layout_width="0dp" android:layout_height="wrap_content"
-                                android:layout_weight="1" android:text="0"
-                                android:textSize="22sp" android:textStyle="bold"
-                                android:textColor="@color/colorInfo"
-                                android:gravity="center" />
-                            <Button android:id="@+id/btn_qty_plus"
-                                android:layout_width="32dp" android:layout_height="32dp"
-                                android:text="+" android:textSize="18sp" android:textStyle="bold"
-                                android:textColor="@color/textPrimary" android:background="@color/bgCard"
-                                android:padding="0dp" />
+                    <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="vertical" android:background="@color/statBlueBg" android:padding="12dp" android:layout_marginStart="4dp">
+                        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:gravity="center_vertical">
+                            <Button android:id="@+id/btn_qty_minus" android:layout_width="32dp" android:layout_height="48dp" android:text="-" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/textPrimary" android:background="@drawable/bg_btn_primary" android:padding="0dp" />
+                            <TextView android:id="@+id/tv_scan_qty" android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:text="0" android:textSize="22sp" android:textStyle="bold" android:textColor="@color/colorInfo" android:gravity="center" />
+                            <Button android:id="@+id/btn_qty_plus" android:layout_width="32dp" android:layout_height="48dp" android:text="+" android:textSize="18sp" android:textStyle="bold" android:textColor="@color/textPrimary" android:background="@drawable/bg_btn_primary" android:padding="0dp" />
                         </LinearLayout>
-                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                            android:text="SCAN QTY" android:textSize="8sp" android:textStyle="bold"
-                            android:textColor="@color/textLabel" android:layout_marginTop="3dp"
-                            android:gravity="center" />
+                        <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="SCAN QTY" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:layout_marginTop="3dp" android:gravity="center" />
                     </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-
-            <!-- Scan HU -->
-            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                android:orientation="vertical" android:background="@color/bgCard"
-                android:padding="14dp" android:layout_marginBottom="10dp">
-                <TextView android:layout_width="match_parent" android:layout_height="wrap_content"
-                    android:text="SCAN HU" android:textSize="10sp" android:textStyle="bold"
-                    android:textColor="@color/textLabel" android:letterSpacing="0.08"
-                    android:layout_marginBottom="10dp" />
-                <EditText android:id="@+id/et_scan_hu"
-                    android:layout_width="match_parent" android:layout_height="52dp"
-                    android:background="@color/bgInput" android:textColor="@color/textPrimary"
-                    android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold"
-                    android:paddingStart="14dp" android:paddingEnd="14dp"
-                    android:hint="Scan HU barcode..." android:imeOptions="actionDone"
-                    android:maxLines="1" android:singleLine="true" android:inputType="text" />
+            <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="vertical" android:background="@color/bgCard" android:padding="14dp" android:layout_marginBottom="10dp">
+                <TextView android:layout_width="match_parent" android:layout_height="wrap_content" android:text="SCAN HU" android:textSize="10sp" android:textStyle="bold" android:textColor="@color/textLabel" android:letterSpacing="0.08" android:layout_marginBottom="10dp" />
+                <EditText android:id="@+id/et_scan_hu" android:layout_width="match_parent" android:layout_height="52dp" android:background="@color/bgInput" android:textColor="@color/textPrimary" android:textColorHint="@color/textHint" android:textSize="15sp" android:textStyle="bold" android:paddingStart="14dp" android:paddingEnd="14dp" android:hint="Scan HU barcode..." android:imeOptions="actionDone" android:maxLines="1" android:singleLine="true" android:inputType="text" />
             </LinearLayout>
-
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-        android:orientation="horizontal" android:padding="14dp" android:background="@color/bgCard">
-        <Button android:id="@+id/btn_empty_crate"
-            android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1"
-            android:layout_marginEnd="6dp" android:text="Empty crate"
-            android:textColor="@color/colorWarning" android:textSize="12sp" android:textStyle="bold"
-            android:background="@color/colorWarningBg" />
-        <Button android:id="@+id/btn_putway_back"
-            android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1"
-            android:layout_marginStart="6dp" android:text="Back"
-            android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold"
-            android:background="@color/bgInput" />
+    <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content" android:orientation="horizontal" android:padding="14dp" android:background="@color/bgCard">
+        <Button android:id="@+id/btn_empty_crate" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:layout_marginEnd="6dp" android:text="Empty crate" android:textColor="@color/white" android:textSize="12sp" android:textStyle="bold" android:background="@drawable/bg_btn_warning" />
+        <Button android:id="@+id/btn_putway_back" android:layout_width="0dp" android:layout_height="48dp" android:layout_weight="1" android:layout_marginStart="6dp" android:text="Back" android:textColor="@color/textPrimary" android:textSize="12sp" android:textStyle="bold" android:background="@drawable/bg_btn_primary" />
     </LinearLayout>
 </LinearLayout>
