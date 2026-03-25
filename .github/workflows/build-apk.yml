@@ -13,49 +13,42 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v3
 
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v3
         with:
           java-version: "17"
           distribution: "temurin"
 
-      - name: Cache Gradle packages
-        uses: actions/cache@v4
+      - name: Cache Gradle
+        uses: actions/cache@v3
         with:
-          path: |
-            ~/.gradle/caches
-            ~/.gradle/wrapper
-          key: ${{ runner.os }}-gradle-${{ hashFiles("**/*.gradle*", "**/gradle-wrapper.properties") }}
-          restore-keys: ${{ runner.os }}-gradle-
-
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
+          path: ~/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles("**/*.gradle*") }}
 
       - name: Build Release APK
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease --no-daemon
 
-      - name: Find and copy APK
+      - name: Find APK
         run: |
-          echo "=== All APKs built ==="
-          find app/build/outputs/apk -name "*.apk" | sort
+          find app/build/outputs/apk -name "*.apk"
           APK=$(find app/build/outputs/apk/release -name "*.apk" | head -1)
-          echo "Using: $APK"
           cp "$APK" V2_HHT_Azure_Release.apk
-          echo "APK size: $(du -sh V2_HHT_Azure_Release.apk)"
+          echo "APK=$(pwd)/V2_HHT_Azure_Release.apk" >> $GITHUB_ENV
+          du -sh V2_HHT_Azure_Release.apk
 
-      - name: Upload APK Artifact
-        uses: actions/upload-artifact@v4
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v3
         with:
           name: V2-HHT-Azure-Release
           path: V2_HHT_Azure_Release.apk
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
         with:
           tag_name: v12.098-azure-${{ github.run_number }}
           name: "V2 HHT v12.098 — Azure Build #${{ github.run_number }}"
