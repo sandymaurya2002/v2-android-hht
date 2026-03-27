@@ -34,6 +34,7 @@ android {
             minifyEnabled false
             shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 
@@ -48,14 +49,14 @@ android {
 
 android {
     signingConfigs {
-        debug {
-            // storeFile file('H:\\keystore\\V2Retail_at_456_keystore')
-
-            storeFile file('/Users/maddy/Projects/V2Retail_at_456_keystore')
-            //storeFile file('D:\\Projects\\V2Retail_at_456_keystore')
-            storePassword 'V2Retail@456'
-            keyAlias 'v2retail'
-            keyPassword 'V2Retail@456'
+        release {
+            // CI uses KEYSTORE_PATH env var (decoded from secret)
+            // Local build falls back to Maddy's path
+            def ksPath = System.getenv("KEYSTORE_PATH") ?: '/Users/maddy/Projects/V2Retail_at_456_keystore'
+            storeFile file(ksPath)
+            storePassword System.getenv("KEYSTORE_PASSWORD") ?: 'V2Retail@456'
+            keyAlias System.getenv("KEY_ALIAS") ?: 'v2retail'
+            keyPassword System.getenv("KEY_PASSWORD") ?: 'V2Retail@456'
         }
     }
     compileOptions {
