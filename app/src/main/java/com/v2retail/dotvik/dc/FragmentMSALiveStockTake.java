@@ -730,7 +730,7 @@ public class FragmentMSALiveStockTake extends Fragment implements View.OnClickLi
                 args.put("bapiname", Vars.ZWM_STK_ADJ_MSA_BIN);
                 args.put("IM_WERKS", WERKS);
                 args.put("IM_USER", USER);
-                args.put("IM_STOCK_TAKE_ID", USER);
+                args.put("IM_STOCK_TAKE_ID", tv_stock_take_id.getText().toString());
                 args.put("IM_CRATE", UIFuncs.toUpperTrim(txt_cur_crate));
                 args.put("IM_BIN", UIFuncs.toUpperTrim(txt_cur_binno));
                 args.put("IM_DESKTOP", UIFuncs.toUpperTrim(txt_cur_crate).isEmpty() ? "" : "X");
