@@ -35,12 +35,15 @@
     <string name="date">Date.</string>
 
     <array name="ipAddress">
-        <!-- Azure (PRIMARY — use this) -->
-        <item>https://v2-hht-api.azurewebsites.net/api/hht (Azure Prod)</item>
-        <!-- Legacy servers (fallback only) -->
-        <item>https://app.v2axasync-prd.v2rtl.com:8443/xmwgw (Old Prod)</item>
+        <!-- Azure Cloud (PRIMARY) -->
+        <item>https://v2-hht-api.azurewebsites.net/api/hht (V2 Cloud)</item>
+        <!-- Dev and QA via Tomcat on Server 40 -->
+        <item>http://192.168.151.40:16080/xmwgw (Dev)</item>
+        <item>http://192.168.151.40:17080/xmwgw (QA)</item>
+        <!-- Fallback -->
         <item>http://192.168.144.200:9080/xmwgw (HanaProd)</item>
-        <item>http://192.168.151.40:17080/xmwgw (HanaQA)</item>
+        <item>http://103.29.220.152:1080/hanadev (Dev External)</item>
+        <item>http://103.29.220.152:1080/hanaqa (QA External)</item>
     </array>
     <array name="choose_store">
         <item>DC</item>
